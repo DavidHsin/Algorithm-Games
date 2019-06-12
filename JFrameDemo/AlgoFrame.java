@@ -1,5 +1,9 @@
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -50,18 +54,22 @@ class AlgoFrame extends JFrame {
 		public void paintComponent(Graphics g) {
 			
 			super.paintComponent(g);
-			//对于屏幕坐标系而言，原点是在左上角的位置
-			/**
-			 * 原点   ------------------> x
-			 *      |
-			 *      |
-			 *      |
-			 *      |
-			 *      |
-			 *      |
-			 *      y
-			 * */
-			g.drawOval(50, 50, 300, 300);	//在500x500的面板中，找到(50,50)的坐标，绘制一个高300宽300的正方形，以这个正方形在里面画出一个圆
+			
+			//使用Graphics2D绘图
+			Graphics2D g2d = (Graphics2D)g;
+			
+			//改变空心圆线条的粗细
+			int strokeWidth = 5;			//默认是1，现在设置为10
+			g2d.setStroke(new BasicStroke(strokeWidth));
+			
+			g2d.setColor(Color.red);		//改变线条的颜色
+			Ellipse2D circle = new Ellipse2D.Double(50, 50, 300, 300);
+			g2d.draw(circle);
+			
+			//绘制一个实心圆，并改变颜色
+			g2d.setColor(Color.blue);
+			Ellipse2D circle2 = new Ellipse2D.Double(50, 50, 300, 300);
+			g2d.fill(circle2);
 		}
 		
 		@Override
