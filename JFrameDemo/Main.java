@@ -1,43 +1,20 @@
-import java.awt.EventQueue;
-
+/**
+ * 实现MVC结构：
+ * MVC模式（Model–view–controller）是软件工程中的一种软件架构模式，
+ * 把软件系统分为三个基本部分：模型（Model）、视图（View）和控制器（Controller）。
+ * 
+ * */
 public class Main {
 
 	public static void main(String[] args) {
 		
 		int sceneWidth = 500;
 		int sceneHeight = 500;
-		
-		//设置circles的数据
 		int N = 10;							//画10个圆
-		Circle[] circles = new Circle[N];
-		int R = 50;
-		for(int i = 0; i < N; i++) {
-			int x = (int)(Math.random() * (sceneWidth - 2 * R)) + R;
-			int y = (int)(Math.random() * (sceneWidth - 2 * R)) + R;
-			int vx = (int)(Math.random() * 11) - 5;
-			int vy = (int)(Math.random() * 11) - 5;
-			circles[i] = new Circle(x, y, R, vx, vy);
-		}
 		
+		//直接调用封装好的控制器
+		AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight, N);
 		
-		//把GUI创建的代码放进新的线程（事件分发线程）中
-		EventQueue.invokeLater(() -> {
-			AlgoFrame frame = new AlgoFrame("welcome", sceneWidth, sceneHeight);
-			
-			new Thread(() -> {
-				while(true) {	//设置为死循环
-					//绘制数据
-					frame.render(circles);
-					AlgoVisHelper.pause(20);
-					
-					//更新数据
-					for(Circle circle: circles) {
-						circle.move(0, 0, sceneWidth, sceneHeight);
-					}
-				}
-			}).start();
-			
-		});
 		
 	}
 }
