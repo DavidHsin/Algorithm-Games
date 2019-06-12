@@ -46,6 +46,10 @@ class AlgoFrame extends JFrame {
 	//对内容面板进行绘制
 	private class AlgoCanvas extends JPanel {
 		
+		public AlgoCanvas() {
+			super(true);	//boolean isDoubleBuffered: true(支持双缓存机制)
+		}
+		
 		@Override
 		public void paintComponent(Graphics g) {
 			
@@ -53,6 +57,10 @@ class AlgoFrame extends JFrame {
 			
 			//使用Graphics2D绘图
 			Graphics2D g2d = (Graphics2D)g;
+			
+			//抗锯齿
+			RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.addRenderingHints(hints);
 			
 			//调用绘制工具辅助函数
 			AlgoVisHelper.setStrokeWidth(g2d, 5);
