@@ -1,8 +1,4 @@
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 import javax.swing.JFrame;
@@ -58,18 +54,16 @@ class AlgoFrame extends JFrame {
 			//使用Graphics2D绘图
 			Graphics2D g2d = (Graphics2D)g;
 			
-			//改变空心圆线条的粗细
-			int strokeWidth = 5;			//默认是1，现在设置为10
-			g2d.setStroke(new BasicStroke(strokeWidth));
+			//调用绘制工具辅助函数
+			AlgoVisHelper.setStrokeWidth(g2d, 5);
 			
-			g2d.setColor(Color.red);		//改变线条的颜色
-			Ellipse2D circle = new Ellipse2D.Double(50, 50, 300, 300);
-			g2d.draw(circle);
+			//具体绘制
+			AlgoVisHelper.setColor(g2d, Color.blue);
+			AlgoVisHelper.fillCircle(g2d, canvasWidth / 2, canvasHeight / 2, 200);
 			
-			//绘制一个实心圆，并改变颜色
-			g2d.setColor(Color.blue);
-			Ellipse2D circle2 = new Ellipse2D.Double(50, 50, 300, 300);
-			g2d.fill(circle2);
+			AlgoVisHelper.setColor(g2d, Color.red);
+			AlgoVisHelper.strokeCircle(g2d, canvasWidth / 2, canvasHeight / 2, 200);
+			
 		}
 		
 		@Override
