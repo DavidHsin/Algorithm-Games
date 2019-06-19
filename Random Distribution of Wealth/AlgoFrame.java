@@ -32,9 +32,9 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // TODO: 设置自己的数据
-    private Object data;
-    public void render(Object data){
-        this.data = data;
+    private int[] money;				//每个人手里的钱
+    public void render(int[] money){
+        this.money = money;
         repaint();
     }
 
@@ -59,7 +59,11 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            // TODO： 绘制自己的数据data
+            AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);	//设置颜色
+            int w = canvasWidth / money.length;					//设置柱状图的每一个矩形的宽度
+            for(int i = 0; i < money.length; i++) {				//每个人的钱都绘制柱状图
+            	AlgoVisHelper.fillRectangle(g2d, i * w + 1, canvasHeight - money[i], w - 1, money[i]);
+            }
         }
 
         @Override
