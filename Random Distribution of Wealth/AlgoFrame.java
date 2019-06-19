@@ -59,10 +59,18 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);	//设置颜色
+            
             int w = canvasWidth / money.length;					//设置柱状图的每一个矩形的宽度
             for(int i = 0; i < money.length; i++) {				//每个人的钱都绘制柱状图
-            	AlgoVisHelper.fillRectangle(g2d, i * w + 1, canvasHeight - money[i], w - 1, money[i]);
+            	//这里区分出不同，当某个人的财富大于0的时候
+            	if(money[i] > 0) {
+            		AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);	//设置颜色
+                	AlgoVisHelper.fillRectangle(g2d, i * w + 1, canvasHeight / 2 - money[i], w - 1, money[i]);
+            	}else if(money[i] < 0) {
+            		//当某个人财富小于0，即负债的时候
+            		AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
+            		AlgoVisHelper.fillRectangle(g2d, i * w + 1, canvasHeight / 2, w - 1, -money[i]);
+            	}
             }
         }
 
