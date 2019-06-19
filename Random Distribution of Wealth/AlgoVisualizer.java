@@ -46,12 +46,12 @@ public class AlgoVisualizer {
     		//更新逻辑，也可以每50轮游戏进行一次模拟，加一层for循环
     		//现在动画模拟的速度是不加这层for循环的50倍
     		for(int k = 0; k < 50; k++) {
-	    		for(int i = 0; i < money.length; i++) {					//i代表每一个人，每次要给对方一块钱
-	    			if(money[i] > 0) {									//设置没有人欠钱
-	    				int j = (int)(Math.random() * money.length);	//让第i个人给第j个人一块钱
-	    				money[i] -= 1;
-	    				money[j] += 1;
-	    			}
+	    		for(int i = 0; i < money.length; i++) {				//i代表每一个人，每次要给对方一块钱
+	    			//if(money[i] > 0) {							//把for循环去掉，就代表某个人负债，即当前的财富为负值
+	    			int j = (int)(Math.random() * money.length);	//让第i个人给第j个人一块钱
+	    			money[i] -= 1;
+	    			money[j] += 1;
+	    			//}
 	    		}
     		}
     	}
