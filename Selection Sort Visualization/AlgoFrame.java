@@ -58,11 +58,25 @@ public class AlgoFrame extends JFrame{
             hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g2d.addRenderingHints(hints);
 
-            // 具体绘制
+            // 具体绘制：对已经排序的和未排序的还有未排序数组中的最小值进行不同颜色的标记
             int w = canvasWidth / data.N();
-            AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
+            //AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
             
             for(int i = 0; i < data.N(); i++) {	//绘制矩形
+            	
+            	if(i < data.orderedIndex) {
+            		AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
+            	}else {
+            		AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
+            	}
+            	
+            	if(i == data.currentCompareIndex) {
+            		AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
+            	}
+            	if(i == data.currentMinIndex) {
+            		AlgoVisHelper.setColor(g2d, AlgoVisHelper.Black);
+            	}
+            	
             	AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - data.get(i), w - 1, data.get(i));
             }
         }
