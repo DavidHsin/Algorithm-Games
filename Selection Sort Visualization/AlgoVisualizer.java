@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 
 public class AlgoVisualizer {
 	
-	private static int DELAY = 100;
+	private static int DELAY = 80;
 
     // TODO: 创建自己的数据
     private SelectionSortData data;        // 数据
@@ -30,21 +30,31 @@ public class AlgoVisualizer {
     // 动画逻辑
     private void run(){
     	
-    	frame.render(data);
-    	AlgoVisHelper.pause(DELAY);
+    	setData(0, -1, -1);
     	
         // 编写自己的动画逻辑
     	for(int i = 0; i < data.N(); i++) {
     		int minIndex = i;
+    		setData(i, -1, minIndex);
+    		
     		for(int j = i + 1; j < data.N(); j++) {
+    			setData(i, j, minIndex);
     			if(data.get(j) < data.get(minIndex)) {
     				minIndex = j;
+    				setData(i, j, minIndex);
     			}
     		}
     		data.swap(i, minIndex);
-    		frame.render(data);
-        	AlgoVisHelper.pause(DELAY);	//在数据进行swap之后进行渲染
+    		setData(i + 1, -1, -1);
     	}
+    	
+    	setData(data.N(), -1, -1);
+    }
+    
+    private void setData(int orderedIndex, int currentCompareIndex, int currentMinIndex) {
+    	data.orderedIndex = orderedIndex;
+    	data.currentCompareIndex = currentCompareIndex;
+    	data.currentMinIndex = currentMinIndex;
     	
     	frame.render(data);
     	AlgoVisHelper.pause(DELAY);
